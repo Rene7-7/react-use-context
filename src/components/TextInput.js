@@ -1,22 +1,21 @@
-import React, {useContext} from 'react';
-import ThemeContext from '../ThemeContext'
-import themeDarkStyles from '../ThemeDark.module.css';
-import themeLightStyles from '../ThemeLight.module.css';
+import React, { useContext, useEffect } from 'react';
+import ThemeContext, { SwitchStyles } from '../ThemeContext'
 
 const TextInput = (props) => {
-    const {theme, setTheme} = useContext(ThemeContext);
+    const { themeStyles, setThemeStyles } = useContext(ThemeContext);
 
-    const handleTheme = (event) => {
-        event.preventDefault();
-        setTheme( theme === themeDarkStyles ? themeLightStyles : themeDarkStyles);
+    const handleChangeTheme = (e) => {
+        setThemeStyles(SwitchStyles(themeStyles));
     }
-    const handleChange = (event) => {}
+
+    const handleChange = (event) => { }
+
     return (
-    <div>
-        <label>{props.label}</label>
-        <input type="text" onChange={handleChange} />
-        <a href="#" onClick={handleTheme}>change Theme from child</a>
-    </div>
+        <div>
+            <label>{props.label}: </label>
+            <input type="text" onChange={handleChange} />
+            <p><small><a href="#" onClick={handleChangeTheme}>change Theme from child</a></small></p>
+        </div>
     );
 }
 
